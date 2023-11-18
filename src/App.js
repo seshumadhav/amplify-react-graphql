@@ -76,13 +76,14 @@ const App = () => {
             </label>
           </div>
         </div>
-        <hr className="my-4" /> {/* Horizontal line to separate Input and Output sections */}
         <button className="btn btn-primary me-2" onClick={handleSubmit}>
           Submit
         </button>
         <button className="btn btn-secondary" onClick={handleCancel}>
           Cancel
         </button>
+        <hr className="my-4" /> {/* Horizontal line to separate Input and Output sections */}
+
       </div>
 
       {/* Output Section */}
