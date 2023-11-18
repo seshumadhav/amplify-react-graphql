@@ -66,7 +66,7 @@ const App = () => {
           </div>
           <div className="col-md-6 mb-3">
             <label className="form-label">
-              Jobseeker IDs:
+              Jobseeker AccountID: 
               <input
                 type="text"
                 className="form-control"
