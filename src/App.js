@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import './App.css'; // Import custom CSS for font styling
+import CircleProgressBar from './CircleProgressBar';
 
 const App = () => {
   const [jobId, setJobId] = useState('');
@@ -19,6 +20,7 @@ const App = () => {
   const [scoresAndAttributes, setScoresAndAttributes] = useState({
     momScore: 80,
     dadScore: 75,
+    aqModelScore: 25, // New score
     overlappingAttributes: ['React', 'Remote'],
   });
 
@@ -49,6 +51,7 @@ const App = () => {
     setScoresAndAttributes({
       momScore: 0,
       dadScore: 0,
+      aqModelScore: 0,
       overlappingAttributes: [],
     });
   };
@@ -59,39 +62,38 @@ const App = () => {
       <div className="mb-4">
         <div className="row">
           <div className="col-md-6 mb-3">
-            <label className="form-label">
+            <label className="form-label" style={{ marginBottom: '5px' }}>
               Job ID:
-              <input type="text" className="form-control" value={jobId} onChange={handleJobIdChange} />
             </label>
+            <input type="text" className="form-control" value={jobId} onChange={handleJobIdChange} />
           </div>
           <div className="col-md-6 mb-3">
-            <label className="form-label">
-              Jobseeker AccountID: 
-              <input
-                type="text"
-                className="form-control"
-                value={jobseekerIds}
-                onChange={handleJobseekerIdsChange}
-              />
+            <label className="form-label" style={{ marginBottom: '5px' }}>
+              Job Seeker Account ID:
             </label>
+            <input
+              type="text"
+              className="form-control"
+              value={jobseekerIds}
+              onChange={handleJobseekerIdsChange}
+            />
           </div>
         </div>
+        <hr className="my-4" /> {/* Horizontal line to separate Input and Output sections */}
         <button className="btn btn-primary me-2" onClick={handleSubmit}>
           Submit
         </button>
         <button className="btn btn-secondary" onClick={handleCancel}>
           Cancel
         </button>
-        <hr className="my-4" /> {/* Horizontal line to separate Input and Output sections */}
-
       </div>
 
       {/* Output Section */}
-      <div className="d-flex flex-wrap">
+      <div className="row">
         {/* Panel 1: Job Information */}
-        <div className="col-md-6 mb-4 pe-md-3">
-          <div className="border p-4 h-100 d-flex flex-column">
-            <h2 className="text-muted">Job Information</h2>
+        <div className="col-md-6 mb-4">
+          <div className="border p-4" style={{ height: '100%' }}>
+            <h2 className="text-muted mb-4">Job Information</h2>
             <p>
               <strong>Requirements:</strong> {jobInfo.requirements}
             </p>
@@ -108,9 +110,9 @@ const App = () => {
         </div>
 
         {/* Panel 2: Job Seeker Information */}
-        <div className="col-md-6 mb-4 ps-md-3">
-          <div className="border p-4 h-100 d-flex flex-column">
-            <h2 className="text-muted">Job Seeker Info</h2>
+        <div className="col-md-6 mb-4">
+          <div className="border p-4" style={{ height: '100%' }}>
+            <h2 className="text-muted mb-4">Job Seeker Information</h2>
             <p>
               <strong>Qualifications:</strong> {jobSeekerInfo.qualifications}
             </p>
@@ -122,21 +124,43 @@ const App = () => {
             </p>
           </div>
         </div>
-      </div>
 
-      {/* Panel 3: Overlap Info & Scores*/}
-      <div className="border p-4">
-        <h2 className="text-muted">Overlap Info & Scores</h2>
-        <p>
-          <strong>MOM Score:</strong> {scoresAndAttributes.momScore}
-        </p>
-        <p>
-          <strong>DAD Score:</strong> {scoresAndAttributes.dadScore}
-        </p>
-        <p>
-          <strong>Overlapping Attributes:</strong>{' '}
-          {scoresAndAttributes.overlappingAttributes.join(', ')}
-        </p>
+        {/* Panel 3: Match Comparison (MOM Score, DAD Score, AQ Model Score, and Overlap Information) */}
+        <div className="col-md-12 mb-4">
+          <div className="border p-4">
+            <h2 className="text-muted mb-4">Match Comparison</h2>
+            <div className="row">
+              <div className="col-md-3 mb-4">
+                <p className="mb-2">
+                  <strong>MOM Score:</strong>
+                </p>
+                <CircleProgressBar score={scoresAndAttributes.momScore} maxScore={100} />
+              </div>
+              <div className="col-md-3 mb-4">
+                <p className="mb-2">
+                  <strong>DAD Score:</strong>
+                </p>
+                <CircleProgressBar score={scoresAndAttributes.dadScore} maxScore={100} />
+              </div>
+              <div className="col-md-3 mb-4">
+                <p className="mb-2">
+                  <strong>AQ Model Score:</strong>
+                </p>
+                <CircleProgressBar score={scoresAndAttributes.aqModelScore} maxScore={100} />
+              </div>
+              <div className="col-md-3 mb-4">
+                <p className="mb-2">
+                  <strong>Overlapping Attributes:</strong>
+                </p>
+                <ul>
+                  {scoresAndAttributes.overlappingAttributes.map((attribute, index) => (
+                    <li key={index}>{attribute}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
