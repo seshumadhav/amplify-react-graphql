@@ -68,3 +68,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+URI:  https://main.do9tfbvgc63rj.amplifyapp.com/
+AWS Amplify Dashboard: https://us-east-1.console.aws.amazon.com/amplify/home?region=us-east-1#/do9tfbvgc63rj
+Tutorial: https://aws.amazon.com/getting-started/hands-on/build-react-app-amplify-graphql/
